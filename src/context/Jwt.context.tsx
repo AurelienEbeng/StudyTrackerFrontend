@@ -9,7 +9,7 @@ type User = {
 
 type UserContext = {
   user: User;
-  login: (username: string, password: string) => void;
+  login: (email: string, password: string) => void;
   logout: () => void;
   isLoggedIn: () => boolean;
 };
