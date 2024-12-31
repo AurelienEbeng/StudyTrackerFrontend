@@ -5,7 +5,7 @@ import { Menu } from "@mui/icons-material";
 
 const links = [
   { href: "/", label: "Highlight" },
-  { href: "/tasks", label: "Tasks" },
+  { href: "/task", label: "Task" },
   { href: "/session", label: "Session" },
   { href: "/profile", label: "Profile" },
   { href: "/logout", label: "Logout" },
