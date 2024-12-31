@@ -31,7 +31,7 @@ const column: GridColDef[] = [
       return (
         <Button variant="outlined">
           <Link
-            to="/task/update/"
+            to="/task/update"
             state={{
               task: {
                 id: `${params.row.id}`,
