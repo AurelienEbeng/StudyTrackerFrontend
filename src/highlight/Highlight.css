@@ -1,0 +1,13 @@
+.highlight {
+  * {
+    color: var(--text-color1);
+  }
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid white;
+  }
+  
+}
