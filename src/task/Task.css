@@ -1,11 +1,18 @@
-.task{
-    *{
-        color: var(--text-color1);
-    }
+.task {
+  * {
+    color: var(--text-color1);
+  }
 
-    .tasks-grid{
-        *{
-            background-color: var(--bg-color);
-        }
+  .tasks-grid {
+    * {
+      background-color: var(--bg-color);
     }
+  }
+}
+
+.new-task {
+  * {
+    color: var(--text-color1);
+    border-color: white;
+  }
 }

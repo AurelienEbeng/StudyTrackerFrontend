@@ -6,6 +6,8 @@ import { lazy } from "react";
 const Login = lazy(() => import("./login/Login"));
 const Highlight = lazy(() => import("./highlight/Highlight"));
 const Task = lazy(() => import("./task/Task"));
+const NewTask = lazy(() => import("./task/NewTask"));
+
 function App() {
   return (
     <div className="app">
@@ -15,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Highlight />} />
           <Route path="/task" element={<Task />} />
+          <Route path="/task/create" element={<NewTask />} />
         </Routes>
       </div>
     </div>
