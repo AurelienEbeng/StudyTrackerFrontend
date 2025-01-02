@@ -19,3 +19,10 @@
     border-color: white;
   }
 }
+
+.update-task {
+    * {
+      color: var(--text-color1);
+      border-color: white;
+    }
+  }
