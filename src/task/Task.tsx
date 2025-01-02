@@ -29,22 +29,20 @@ const column: GridColDef[] = [
     flex: 1,
     renderCell: (params) => {
       return (
-        <Button variant="outlined">
-          <Link
-            to="/task/update"
-            state={{
-              task: {
-                id: `${params.row.id}`,
-                title: `${params.row.title}`,
-                state: `${params.row.state}`,
-                dateCreated: `${params.row.dateCreated}`,
-                userId: `${params.row.userId}`,
-              },
-            }}
-          >
-            Update
-          </Link>
-        </Button>
+        <Link
+          to="/task/update"
+          state={{
+            task: {
+              id: `${params.row.id}`,
+              title: `${params.row.title}`,
+              state: `${params.row.state}`,
+              dateCreated: `${params.row.dateCreated}`,
+              userId: `${params.row.userId}`,
+            },
+          }}
+        >
+          Update
+        </Link>
       );
     },
   },
