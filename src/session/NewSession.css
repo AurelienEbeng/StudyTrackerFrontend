@@ -3,5 +3,14 @@
     color: var(--text-color1);
     border-color: white;
   }
-  
+}
+
+.MuiTextField-root{
+  width: 223px;
+}
+
+.duration{
+  .MuiTextField-root{
+    width: 70px;
+  }
 }

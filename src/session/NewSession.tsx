@@ -6,12 +6,17 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import "./NewSession.css";
 import { Temporal } from "@js-temporal/polyfill";
+import { useLocation } from "react-router-dom";
+
+// Add loading state when button save is clicked
 
 const NewSession = () => {
+  const location = useLocation();
+  const { task } = location.state;
   const [session, setSession] = useState({
     duration: "",
-    comment: "A",
-    taskId: "1",
+    comment: "",
+    taskId: task.id,
     year: "",
     month: "",
     day: "",
@@ -133,8 +138,13 @@ const NewSession = () => {
         value={session.comment}
         onChange={(e) => setSession({ ...session, comment: e.target.value })}
         multiline
-        placeholder="comment"
-        
+        placeholder="Comment"
+      />
+      <TextField
+        autoComplete="off"
+        variant="outlined"
+        value={task.title}
+        label="Task"
       />
       <Button onClick={handleSave} variant="outlined">
         Save
