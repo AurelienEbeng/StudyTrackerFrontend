@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -6,9 +6,9 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import "./NewSession.css";
 import { Temporal } from "@js-temporal/polyfill";
-import { useLocation } from "react-router-dom";
-
-// Add loading state when button save is clicked
+import { useLocation, useNavigate } from "react-router-dom";
+import httpModule from "../helpers/http.module";
+import { useJwt } from "../context/Jwt.context";
 
 const NewSession = () => {
   const location = useLocation();
@@ -27,6 +27,9 @@ const NewSession = () => {
     seconds: 0,
   });
   const [date, setDate] = useState<Dayjs | null>(dayjs(new Date()));
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate()
+  const jwt = useJwt()
 
   useEffect(() => {
     updateSessionDate(date);
@@ -50,6 +53,16 @@ const NewSession = () => {
     }
 
     console.log(session);
+    setLoading(true)
+    httpModule
+      .post("session/create", session, {
+        headers: { Authorization: "Bearer " + jwt.user.jwtToken },
+      })
+      .then(() => navigate("/task"))
+      .catch((error) => {
+        alert("Error, check console");
+        console.log(error.response);
+      });
   }
 
   function updateSessionDate(date: Dayjs | null) {
@@ -78,77 +91,85 @@ const NewSession = () => {
 
   return (
     <div className="content newSession">
-      <h2>New Session</h2>
-      <div className="duration">
-        <span>Duration:</span>
-        <TextField
-          autoComplete="off"
-          variant="outlined"
-          value={duration.hours}
-          onChange={(e) => {
-            let newHour = parseInt(e.target.value);
-            if (newHour >= 0 && newHour <= 23) {
-              setDuration({ ...duration, hours: newHour });
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <h2>New Session</h2>
+          <div className="duration">
+            <span>Duration:</span>
+            <TextField
+              autoComplete="off"
+              variant="outlined"
+              value={duration.hours}
+              onChange={(e) => {
+                let newHour = parseInt(e.target.value);
+                if (newHour >= 0 && newHour <= 23) {
+                  setDuration({ ...duration, hours: newHour });
+                }
+              }}
+              label="Hours"
+              type="number"
+            />
+            <TextField
+              autoComplete="off"
+              variant="outlined"
+              value={duration.minutes}
+              onChange={(e) => {
+                let newMinute = parseInt(e.target.value);
+                if (newMinute >= 0 && newMinute <= 59) {
+                  setDuration({ ...duration, minutes: newMinute });
+                }
+              }}
+              label="Minutes"
+              type="number"
+            />
+            <TextField
+              autoComplete="off"
+              variant="outlined"
+              value={duration.seconds}
+              onChange={(e) => {
+                let newSecond = parseInt(e.target.value);
+                if (newSecond >= 0 && newSecond <= 59) {
+                  setDuration({ ...duration, seconds: newSecond });
+                }
+              }}
+              label="Seconds"
+              type="number"
+            />
+          </div>
+          <div className="datePicker">
+            <span>Date:</span>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                value={date}
+                onChange={(newValue) => setDate(newValue)}
+                showDaysOutsideCurrentMonth
+                disableFuture
+              />
+            </LocalizationProvider>
+          </div>
+          <TextField
+            autoComplete="off"
+            variant="outlined"
+            value={session.comment}
+            onChange={(e) =>
+              setSession({ ...session, comment: e.target.value })
             }
-          }}
-          label="Hours"
-          type="number"
-        />
-        <TextField
-          autoComplete="off"
-          variant="outlined"
-          value={duration.minutes}
-          onChange={(e) => {
-            let newMinute = parseInt(e.target.value);
-            if (newMinute >= 0 && newMinute <= 59) {
-              setDuration({ ...duration, minutes: newMinute });
-            }
-          }}
-          label="Minutes"
-          type="number"
-        />
-        <TextField
-          autoComplete="off"
-          variant="outlined"
-          value={duration.seconds}
-          onChange={(e) => {
-            let newSecond = parseInt(e.target.value);
-            if (newSecond >= 0 && newSecond <= 59) {
-              setDuration({ ...duration, seconds: newSecond });
-            }
-          }}
-          label="Seconds"
-          type="number"
-        />
-      </div>
-      <div className="datePicker">
-        <span>Date:</span>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            value={date}
-            onChange={(newValue) => setDate(newValue)}
-            showDaysOutsideCurrentMonth
-            disableFuture
+            multiline
+            placeholder="Comment"
           />
-        </LocalizationProvider>
-      </div>
-      <TextField
-        autoComplete="off"
-        variant="outlined"
-        value={session.comment}
-        onChange={(e) => setSession({ ...session, comment: e.target.value })}
-        multiline
-        placeholder="Comment"
-      />
-      <TextField
-        autoComplete="off"
-        variant="outlined"
-        value={task.title}
-        label="Task"
-      />
-      <Button onClick={handleSave} variant="outlined">
-        Save
-      </Button>
+          <TextField
+            autoComplete="off"
+            variant="outlined"
+            value={task.title}
+            label="Task"
+          />
+          <Button onClick={handleSave} variant="outlined">
+            Save
+          </Button>
+        </>
+      )}
     </div>
   );
 };
