@@ -14,3 +14,10 @@
     width: 70px;
   }
 }
+
+.listSession {
+  * {
+    color: var(--text-color1);
+    border-color: white;
+  }
+}

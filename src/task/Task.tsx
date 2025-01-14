@@ -13,6 +13,7 @@ type Task = {
   dateCreated: string;
   userId: string;
   state: string;
+  totalDuration: string;
 };
 
 const column: GridColDef[] = [
@@ -58,6 +59,22 @@ const column: GridColDef[] = [
             }}
           >
             New Session
+          </Link>{" "}
+          |{" "}
+          <Link
+            to="/session/list"
+            state={{
+              task: {
+                id: `${params.row.id}`,
+                title: `${params.row.title}`,
+                state: `${params.row.state}`,
+                dateCreated: `${params.row.dateCreated}`,
+                userId: `${params.row.userId}`,
+                totalDuration: `${params.row.totalDuration}`,
+              },
+            }}
+          >
+            List Sessions
           </Link>
         </>
       );

@@ -9,6 +9,7 @@ const Task = lazy(() => import("./task/Task"));
 const NewTask = lazy(() => import("./task/NewTask"));
 const UpdateTask = lazy(() => import("./task/UpdateTask"));
 const NewSession = lazy(() => import("./session/NewSession"));
+const ListSessions = lazy(() => import("./session/ListSessions"));
 const Profile = lazy(() => import("./profile/Profile"));
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/task/create" element={<NewTask />} />
           <Route path="/task/update" element={<UpdateTask />} />
           <Route path="/session" element={<NewSession />} />
+          <Route path="/session/list" element={<ListSessions />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
