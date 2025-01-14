@@ -8,6 +8,7 @@ const Highlight = lazy(() => import("./highlight/Highlight"));
 const Task = lazy(() => import("./task/Task"));
 const NewTask = lazy(() => import("./task/NewTask"));
 const UpdateTask = lazy(() => import("./task/UpdateTask"));
+const NewSession = lazy(() => import("./session/NewSession"));
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/task" element={<Task />} />
           <Route path="/task/create" element={<NewTask />} />
           <Route path="/task/update" element={<UpdateTask />} />
+          <Route path="/session" element={<NewSession />} />
         </Routes>
       </div>
     </div>
