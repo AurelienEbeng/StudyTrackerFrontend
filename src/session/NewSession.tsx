@@ -33,7 +33,6 @@ const NewSession = () => {
 
   useEffect(() => {
     updateSessionDate(date);
-    updateSessionDuration(duration);
   }, [date]);
 
   useEffect(() => {
@@ -50,10 +49,10 @@ const NewSession = () => {
       session.taskId == ""
     ) {
       alert("Fill all fields");
+      return;
     }
 
-    console.log(session);
-    setLoading(true)
+    setLoading(true);
     httpModule
       .post("session/create", session, {
         headers: { Authorization: "Bearer " + jwt.user.jwtToken },
