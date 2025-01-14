@@ -11,6 +11,7 @@ const UpdateTask = lazy(() => import("./task/UpdateTask"));
 const NewSession = lazy(() => import("./session/NewSession"));
 const ListSessions = lazy(() => import("./session/ListSessions"));
 const Profile = lazy(() => import("./profile/Profile"));
+const Logout = lazy(() => import("./logout/Logout"));
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/session" element={<NewSession />} />
           <Route path="/session/list" element={<ListSessions />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </div>
     </div>
