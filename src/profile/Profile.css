@@ -1,0 +1,9 @@
+.profile {
+  * {
+    color: var(--text-color1);
+    border-color: white;
+  }
+  width: 300px;
+  max-width: 100%;
+  margin:auto;
+}
