@@ -13,6 +13,7 @@ const ListSessions = lazy(() => import("./session/ListSessions"));
 const Profile = lazy(() => import("./profile/Profile"));
 const Logout = lazy(() => import("./logout/Logout"));
 const Register = lazy(() => import("./register/Register"));
+const ForgotPassword = lazy(() => import("./password/ForgotPassword"));
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
         </Routes>
       </div>
     </div>
