@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useJwt } from "../context/Jwt.context";
 import httpModule from "../helpers/http.module";
-import "./Session.css"
+import "./Session.css";
 
 type Session = {
   duration: string;
@@ -55,18 +55,21 @@ const ListSessions = () => {
   return (
     <div className="content listSession">
       <h2>List Sessions</h2>
-      <TextField
-        autoComplete="off"
-        label="Task"
-        variant="outlined"
-        value={task.title}
-      />
-      <TextField
-        autoComplete="off"
-        label="Total Duration"
-        variant="outlined"
-        value={task.totalDuration}
-      />
+
+      <div className="row">
+        <TextField
+          autoComplete="off"
+          label="Task"
+          variant="outlined"
+          value={task.title}
+        />
+        <TextField
+          autoComplete="off"
+          label="Total Duration"
+          variant="outlined"
+          value={task.totalDuration}
+        />
+      </div>
 
       {loading ? (
         <CircularProgress size={100} />

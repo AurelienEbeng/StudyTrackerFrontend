@@ -6,12 +6,12 @@
   padding-bottom: 50px;
 }
 
-.MuiTextField-root{
+.MuiTextField-root {
   width: 223px;
 }
 
-.duration{
-  .MuiTextField-root{
+.duration {
+  .MuiTextField-root {
     width: 70px;
   }
 }
@@ -20,5 +20,30 @@
   * {
     color: var(--text-color1);
     border-color: white;
+  }
+  .MuiBox-root {
+    * {
+      background-color: var(--bg-color);
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .listSession {
+    .row {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+    }
   }
 }
