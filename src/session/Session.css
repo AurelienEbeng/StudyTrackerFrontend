@@ -3,6 +3,7 @@
     color: var(--text-color1);
     border-color: white;
   }
+  padding-bottom: 50px;
 }
 
 .MuiTextField-root{
