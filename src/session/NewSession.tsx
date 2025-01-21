@@ -52,6 +52,13 @@ const NewSession = () => {
       return;
     }
 
+    if (
+      session.comment.length > 255 
+    ) {
+      alert("Rewrite the comment to have less than 256 characters");
+      return;
+    }
+
     setLoading(true);
     httpModule
       .post("session/create", session, {
@@ -156,7 +163,13 @@ const NewSession = () => {
               setSession({ ...session, comment: e.target.value })
             }
             multiline
-            placeholder="Comment"
+            placeholder="Text must be less than 255 characters"
+          />
+          <TextField
+            autoComplete="off"
+            variant="outlined"
+            value={session.comment.length}
+            label="Comment character count"
           />
           <TextField
             autoComplete="off"
