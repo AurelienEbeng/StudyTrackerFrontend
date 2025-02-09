@@ -1,4 +1,4 @@
-import { Box, CircularProgress, TextField } from "@mui/material";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { DataGrid, gridClasses, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -13,11 +13,6 @@ type Session = {
   id: string;
 };
 
-const column: GridColDef[] = [
-  { field: "comment", headerName: "Comment", flex: 1 },
-  { field: "date", headerName: "Date", flex: 1 },
-  { field: "duration", headerName: "Duration", flex: 1 },
-];
 
 const ListSessions = () => {
   const location = useLocation();
@@ -51,6 +46,33 @@ const ListSessions = () => {
         setLoading(false);
       });
   }, []);
+
+  function deleteSession(sessionId:string){
+    let params = new URLSearchParams();
+    params.append("sessionId", sessionId);
+    httpModule
+      .delete("session/delete?"+params, {
+        headers: { Authorization: "Bearer " + jwt.user.jwtToken },
+      })
+      .then(() => navigate("/task"))
+      .catch((error) => {
+        alert("Error, check console");
+        console.log(error.response);
+      });
+  }
+
+  const column: GridColDef[] = [
+    { field: "comment", headerName: "Comment", flex: 1 },
+    { field: "date", headerName: "Date", flex: 1 },
+    { field: "duration", headerName: "Duration", flex: 1 },
+    {
+      field: "",
+      flex: 1,
+      renderCell: (params) => {
+        return (
+          <Button variant="outlined" onClick={()=> deleteSession(params.row.id)}>Delete</Button>
+        )}}
+  ];
 
   return (
     <div className="content listSession">
